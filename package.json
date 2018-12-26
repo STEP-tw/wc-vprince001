@@ -1,0 +1,25 @@
+{
+  "name": "wc",
+  "version": "1.0.0",
+  "description": "Count character, words and lines of a file",
+  "main": "wc.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/STEP-tw/wc-vprince001.git"
+  },
+  "author": "vprince001",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/STEP-tw/wc-vprince001/issues"
+  },
+  "homepage": "https://github.com/STEP-tw/wc-vprince001#readme",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}
