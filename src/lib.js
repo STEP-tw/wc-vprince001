@@ -8,9 +8,10 @@ const {
   getCharCount
 } = require("./util_lib.js");
 
+const { parse } = require("./parser.js");
 const { TAB, UNICODE } = require("./constants_lib");
 
-const getFileDetails = function(filename, fileContent) {
+const getFileDetails = function(fileContent) {
   const lines = getLines(fileContent);
   const lineCount = getLineCount(lines);
 
@@ -23,13 +24,15 @@ const getFileDetails = function(filename, fileContent) {
   return { lineCount, wordCount, characterCount };
 };
 
-const wc = function(fileName, fs) {
+const wc = function(args, fs) {
+  const { option, fileName } = parse(args);
+
   const fileContent = fs.readFileSync(fileName, UNICODE);
 
-  const { lineCount, wordCount, characterCount } = getFileDetails(
-    fileName,
-    fileContent
-  );
+  const { lineCount, wordCount, characterCount } = getFileDetails(fileContent);
+  if (option == "-l") {
+    return TAB + lineCount + TAB + fileName;
+  }
 
   return (
     TAB + lineCount + TAB + wordCount + TAB + characterCount + TAB + fileName

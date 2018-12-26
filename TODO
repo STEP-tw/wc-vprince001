@@ -9,3 +9,5 @@
 * divide functions into smaller functions if possible
 
 * Sepearte util tests to util_test file
+
+* Add parser to parse single option -l for line count
