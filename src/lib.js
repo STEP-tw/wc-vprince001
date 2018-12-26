@@ -1,14 +1,21 @@
-const wc = function(fileNames, fs) {
+const wc = function(fileName, fs) {
   const tab = "\t";
-  let fileContent = fs.readFileSync(fileNames);
-  let numOfLines = fileContent.split("\n").length;
-  let numOfWords = fileContent.split(/[ \n]+/).filter(word => word !== "").length;
+
+  let fileContent = fs.readFileSync(fileName, "utf8");
+
+  let numOfLines = getLineCount(fileContent, fs);
+  let numOfWords = fileContent.split(/[ \n]+/).filter(word => word !== "")
+    .length;
   let numOfChars = fileContent.split("").length;
 
-  numOfLines--;
   return (
-    tab + numOfLines + tab + numOfWords + tab + numOfChars + tab + fileNames
+    tab + numOfLines + tab + numOfWords + tab + numOfChars + tab + fileName
   );
 };
 
-module.exports = { wc };
+const getLineCount = function(fileContent, fs) {
+  let numOfLines = fileContent.split("\n").length;
+  return numOfLines - 1;
+};
+
+module.exports = { wc, getLineCount };

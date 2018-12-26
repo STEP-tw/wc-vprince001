@@ -1,5 +1,5 @@
 const assert = require("assert");
-const { wc } = require("../src/lib.js");
+const { wc, getLineCount } = require("../src/lib.js");
 
 //===================================================================================================
 
@@ -20,5 +20,13 @@ describe("wc", function() {
     const actual = wc("file1", fs);
     const expected = ["", 3, 5, 21, "file1"].join("\t");
     assert.equal(actual, expected);
+  });
+});
+
+//=====================================================================================================
+
+describe("getFileCount", function() {
+  it("should return number of lines for fileContent and fs", function() {
+    assert.equal(getLineCount(files.file1, fs), 3);
   });
 });
