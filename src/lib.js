@@ -1,20 +1,27 @@
-const wc = function(fileName, fs) {
-  const tab = "\t";
+const {
+  NEWLINE,
+  TAB,
+  WORD_SEPARATOR,
+  EMTPY_STRING,
+  UNICODE
+} = require("./constants_lib.js");
 
-  let fileContent = fs.readFileSync(fileName, "utf8");
+const wc = function(fileName, fs) {
+  let fileContent = fs.readFileSync(fileName, UNICODE);
 
   let numOfLines = getLineCount(fileContent, fs);
-  let numOfWords = fileContent.split(/[ \n]+/).filter(word => word !== "")
-    .length;
-  let numOfChars = fileContent.split("").length;
+  let numOfWords = fileContent
+    .split(WORD_SEPARATOR)
+    .filter(word => word !== EMTPY_STRING).length;
+  let numOfChars = fileContent.split(EMTPY_STRING).length;
 
   return (
-    tab + numOfLines + tab + numOfWords + tab + numOfChars + tab + fileName
+    TAB + numOfLines + TAB + numOfWords + TAB + numOfChars + TAB + fileName
   );
 };
 
 const getLineCount = function(fileContent, fs) {
-  let numOfLines = fileContent.split("\n").length;
+  let numOfLines = fileContent.split(NEWLINE).length;
   return numOfLines - 1;
 };
 

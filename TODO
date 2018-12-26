@@ -4,3 +4,5 @@
 * node ./wc.js file1
     * make test for top level function
     * take a single file as input
+* Review/Refactor code
+* Add library for constants

@@ -1,6 +1,6 @@
 const assert = require("assert");
 const { wc, getLineCount } = require("../src/lib.js");
-
+const { TAB } = require("../src/constants_lib");
 //===================================================================================================
 
 const files = {
@@ -18,7 +18,7 @@ const fs = {
 describe("wc", function() {
   it("should return total lines, words and character count with file name for a single file", function() {
     const actual = wc("file1", fs);
-    const expected = ["", 3, 5, 21, "file1"].join("\t");
+    const expected = ["", 3, 5, 21, "file1"].join(TAB);
     assert.equal(actual, expected);
   });
 });
