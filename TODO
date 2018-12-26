@@ -6,3 +6,4 @@
     * take a single file as input
 * Review/Refactor code
 * Add library for constants
+* divide functions into smaller functions if possible

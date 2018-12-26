@@ -1,28 +1,31 @@
 const {
-  NEWLINE,
-  TAB,
-  WORD_SEPARATOR,
-  EMTPY_STRING,
-  UNICODE
-} = require("./constants_lib.js");
+  getLines,
+  getLineCount,
+  getWords,
+  filterEmptyStrings,
+  getWordCount,
+  getChars,
+  getCharCount
+} = require("./util_lib.js");
+
+const { TAB, UNICODE } = require("./constants_lib");
 
 const wc = function(fileName, fs) {
   let fileContent = fs.readFileSync(fileName, UNICODE);
 
-  let numOfLines = getLineCount(fileContent, fs);
-  let numOfWords = fileContent
-    .split(WORD_SEPARATOR)
-    .filter(word => word !== EMTPY_STRING).length;
-  let numOfChars = fileContent.split(EMTPY_STRING).length;
+  let lines = getLines(fileContent);
+  let numOfLines = getLineCount(lines);
+
+  let words = getWords(fileContent);
+  let filteredWords = filterEmptyStrings(words);
+  let numOfWords = getWordCount(filteredWords);
+
+  let characters = getChars(fileContent);
+  let numOfChars = getCharCount(characters);
 
   return (
     TAB + numOfLines + TAB + numOfWords + TAB + numOfChars + TAB + fileName
   );
 };
 
-const getLineCount = function(fileContent, fs) {
-  let numOfLines = fileContent.split(NEWLINE).length;
-  return numOfLines - 1;
-};
-
-module.exports = { wc, getLineCount };
+module.exports = { wc };
