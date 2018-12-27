@@ -11,3 +11,4 @@
 * Sepearte util tests to util_test file
 
 * Add parser to parse single option -l for line count
+* Modify parser to handle -c and -w option

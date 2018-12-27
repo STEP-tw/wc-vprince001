@@ -1,3 +1,7 @@
+const { parse } = require("./parser.js");
+const { UNICODE } = require("./constants_lib");
+const { format } = require("./formatter.js");
+
 const {
   getLines,
   getLineCount,
@@ -8,10 +12,8 @@ const {
   getCharCount
 } = require("./util_lib.js");
 
-const { parse } = require("./parser.js");
-const { TAB, UNICODE } = require("./constants_lib");
+const getFileDetails = function(fileName, fileContent) {
 
-const getFileDetails = function(fileContent) {
   const lines = getLines(fileContent);
   const lineCount = getLineCount(lines);
 
@@ -20,23 +22,20 @@ const getFileDetails = function(fileContent) {
   const wordCount = getWordCount(filteredWords);
 
   const characters = getChars(fileContent);
-  const characterCount = getCharCount(characters);
-  return { lineCount, wordCount, characterCount };
+
+  const charCount = getCharCount(characters);
+
+  return { fileName, lineCount, wordCount, charCount };
 };
 
 const wc = function(args, fs) {
-  const { option, fileName } = parse(args);
+  const { options, fileName } = parse(args);
 
   const fileContent = fs.readFileSync(fileName, UNICODE);
 
-  const { lineCount, wordCount, characterCount } = getFileDetails(fileContent);
-  if (option == "-l") {
-    return TAB + lineCount + TAB + fileName;
-  }
+  const fileDetails = getFileDetails(fileName, fileContent);
 
-  return (
-    TAB + lineCount + TAB + wordCount + TAB + characterCount + TAB + fileName
-  );
+  return format(fileDetails, options);
 };
 
-module.exports = { wc };
+module.exports = { getFileDetails, wc };

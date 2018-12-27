@@ -1,15 +1,23 @@
 const NEWLINE = "\n";
 const TAB = "\t";
 const WORD_SEPARATOR = /[ \n]+/;
-const EMTPY_STRING = "";
+const EMPTY_STRING = "";
 const UNICODE = "utf8";
 const HYPHEN = "-";
+const OPTION_LINE_COUNT = "lineCount";
+const OPTION_CHAR_COUNT = "charCount";
+const OPTION_WORD_COUNT = "wordCount";
+const SPACE = " ";
 
 module.exports = {
   NEWLINE,
   TAB,
   WORD_SEPARATOR,
-  EMTPY_STRING,
+  EMPTY_STRING,
   UNICODE,
-  HYPHEN
+  HYPHEN,
+  OPTION_LINE_COUNT,
+  OPTION_CHAR_COUNT,
+  OPTION_WORD_COUNT,
+  SPACE
 };
