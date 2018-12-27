@@ -6,9 +6,6 @@ const {
   OPTION_WORD_COUNT
 } = require("./constants_lib.js");
 
-const isOption = candidate =>
-  candidate.startsWith(HYPHEN) && candidate.length > 1;
-
 const getLongOption = function(shortOption) {
   const options = {
     l: OPTION_LINE_COUNT,
@@ -22,20 +19,19 @@ const createParsedArgs = function(options, fileName) {
   return { options, fileName };
 };
 
-const removeHyphen = optionWithHyphen => optionWithHyphen.substr(1);
-
-const getShortOptions = combinedOption =>
-  removeHyphen(combinedOption).split(EMPTY_STRING);
-
 const parse = function(args) {
-  const optionCandidate = args[0];
-  let fileName = args[1];
-  const shortOptions = getShortOptions(optionCandidate);
+  const options = args.filter(optionCandidate =>
+    optionCandidate.startsWith("-")
+  );
+  let fileName = args.slice(options.length);
+  let shortOptions = options;
+  shortOptions = shortOptions.join(EMPTY_STRING).replace(HYPHEN, EMPTY_STRING);
+  shortOptions = shortOptions.split(EMPTY_STRING);
+
   let longOptions = shortOptions.map(getLongOption);
 
-  if (!isOption(optionCandidate)) {
-    fileName = args[0];
-    longOptions = [OPTION_LINE_COUNT, OPTION_WORD_COUNT, OPTION_CHAR_COUNT];
+  if (longOptions.length < 1) {
+    longOptions = [OPTION_LINE_COUNT, OPTION_CHAR_COUNT, OPTION_WORD_COUNT];
   }
 
   return createParsedArgs(longOptions, fileName);

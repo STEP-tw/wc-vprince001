@@ -13,7 +13,6 @@ const {
 } = require("./util_lib.js");
 
 const getFileDetails = function(fileName, fileContent) {
-
   const lines = getLines(fileContent);
   const lineCount = getLineCount(lines);
 
@@ -31,7 +30,7 @@ const getFileDetails = function(fileName, fileContent) {
 const wc = function(args, fs) {
   const { options, fileName } = parse(args);
 
-  const fileContent = fs.readFileSync(fileName, UNICODE);
+  const fileContent = fs.readFileSync(fileName[0], UNICODE);
 
   const fileDetails = getFileDetails(fileName, fileContent);
 
