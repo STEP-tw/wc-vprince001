@@ -9,9 +9,7 @@ const {
 const format = function(fileDetails, options) {
   const orderedOptions = setOrder(options);
   const counts = orderedOptions.map(option => fileDetails[option]);
-
   const formattedCount = TAB + counts.join(TAB);
-
   return [formattedCount, fileDetails.fileName].join(SPACE);
 };
 

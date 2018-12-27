@@ -1,5 +1,5 @@
 const assert = require("assert");
-const { parse } = require("../src/parser.js");
+const { parse, isOption } = require("../src/parser.js");
 
 describe("parse", function() {
   it("should return all options and fileName in object for only fileName in array", function() {
