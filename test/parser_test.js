@@ -6,8 +6,8 @@ describe("parse", function() {
     const args = ["file1"];
     const actual = parse(args);
     const expected = {
-      options: ["lineCount", "charCount", "wordCount"],
-      fileName: ["file1"]
+      options: ["lineCount", "wordCount", "charCount"],
+      fileNames: ["file1"]
     };
 
     assert.deepEqual(actual, expected);
@@ -16,7 +16,7 @@ describe("parse", function() {
   it("should return lineCount as options and fileName in object for -l and fileName in array", function() {
     const args = ["-l", "file1"];
     const actual = parse(args);
-    const expected = { options: ["lineCount"], fileName: ["file1"] };
+    const expected = { options: ["lineCount"], fileNames: ["file1"] };
 
     assert.deepEqual(actual, expected);
   });

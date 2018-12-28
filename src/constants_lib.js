@@ -3,11 +3,10 @@ const TAB = "\t";
 const WORD_SEPARATOR = /[ \n]+/;
 const EMPTY_STRING = "";
 const UNICODE = "utf8";
-const HYPHEN = "-";
+const SPACE = " ";
 const OPTION_LINE_COUNT = "lineCount";
 const OPTION_CHAR_COUNT = "charCount";
 const OPTION_WORD_COUNT = "wordCount";
-const SPACE = " ";
 
 module.exports = {
   NEWLINE,
@@ -15,9 +14,8 @@ module.exports = {
   WORD_SEPARATOR,
   EMPTY_STRING,
   UNICODE,
-  HYPHEN,
+  SPACE,
   OPTION_LINE_COUNT,
   OPTION_CHAR_COUNT,
-  OPTION_WORD_COUNT,
-  SPACE
+  OPTION_WORD_COUNT
 };

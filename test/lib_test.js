@@ -1,6 +1,6 @@
 const assert = require("assert");
 
-const { getFileDetails, wc } = require("../src/lib");
+const { selectOptionCount, getCounts, wc } = require("../src/lib");
 const { TAB } = require("../src/constants_lib");
 
 //===================================================================================================
@@ -17,15 +17,10 @@ const fs = {
 
 //=====================================================================================================
 
-describe("getFileDetails", function() {
+describe("getCounts", function() {
   it("should return total lines, words and character count with file name for a single file", function() {
-    const actual = getFileDetails("file1", files.file1);
-    let expected = {
-      fileName: "file1",
-      lineCount: 2,
-      wordCount: 4,
-      charCount: 15
-    };
+    const actual = getCounts(files.file1, ["lineCount"]);
+    let expected = [2];
     assert.deepEqual(actual, expected);
   });
 });

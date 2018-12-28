@@ -15,17 +15,17 @@ const getLongOption = function(shortOption) {
   return options[shortOption];
 };
 
-const createParsedArgs = function(options, fileName) {
-  return { options, fileName };
+const createParsedArgs = function(options, fileNames) {
+  return { options, fileNames };
 };
 
 const parse = function(args) {
   const options = args.filter(optionCandidate =>
     optionCandidate.startsWith("-")
   );
-  let fileName = args.slice(options.length);
-  let shortOptions = options;
-  shortOptions = shortOptions.join(EMPTY_STRING).replace(HYPHEN, EMPTY_STRING);
+
+  let fileNames = args.slice(options.length);
+  let shortOptions = options.join(HYPHEN);
   shortOptions = shortOptions.split(EMPTY_STRING);
 
   let longOptions = shortOptions.map(getLongOption);
@@ -34,7 +34,10 @@ const parse = function(args) {
     longOptions = [OPTION_LINE_COUNT, OPTION_CHAR_COUNT, OPTION_WORD_COUNT];
   }
 
-  return createParsedArgs(longOptions, fileName);
+  let allOptions = [OPTION_LINE_COUNT, OPTION_WORD_COUNT, OPTION_CHAR_COUNT];
+  longOptions = allOptions.filter(option => longOptions.includes(option));
+
+  return createParsedArgs(longOptions, fileNames);
 };
 
 module.exports = { parse };

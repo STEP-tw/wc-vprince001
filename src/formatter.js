@@ -1,26 +1,26 @@
-const {
-  TAB,
-  SPACE,
-  OPTION_CHAR_COUNT,
-  OPTION_LINE_COUNT,
-  OPTION_WORD_COUNT
-} = require("./constants_lib");
+const { TAB, SPACE, NEWLINE } = require("./constants_lib");
 
-const format = function(fileDetails, options) {
-  const orderedOptions = setOrder(options);
-  const counts = orderedOptions.map(option => fileDetails[option]);
-  const formattedCount = TAB + counts.join(TAB);
-  return [formattedCount, fileDetails.fileName].join(SPACE);
+const singleFileFormatter = function(detail) {
+  return TAB + detail.counts.join(TAB) + SPACE + detail.fileName;
 };
 
-const setOrder = function(options) {
-  const sortedOptions = [
-    OPTION_LINE_COUNT,
-    OPTION_WORD_COUNT,
-    OPTION_CHAR_COUNT
-  ];
+const multipleFileFormatter = function(allFilesDetails) {
+  let output = [];
+  let totalCount = [0, 0, 0];
 
-  return sortedOptions.filter(option => options.includes(option));
+  allFilesDetails.forEach(det => {
+    output.push(singleFileFormatter(det));
+    totalCount[0] += det.counts[0];
+    totalCount[1] += det.counts[1];
+    totalCount[2] += det.counts[2];
+  });
+  totalCount = totalCount.filter(count => !isNaN(count));
+  let totalFileDetail = {
+    counts: totalCount,
+    fileName: "total"
+  };
+  output.push(singleFileFormatter(totalFileDetail));
+  return output.join(NEWLINE);
 };
 
-module.exports = { format };
+module.exports = { singleFileFormatter, multipleFileFormatter };
